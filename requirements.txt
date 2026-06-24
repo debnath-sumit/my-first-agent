@@ -1,0 +1,6 @@
+feedparser
+yfinance
+google-api-python-client
+google-auth-oauthlib
+python-dotenv
+google-genai
