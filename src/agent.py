@@ -3,10 +3,10 @@ from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langgraph.prebuilt import create_react_agent
 
-from news_tool import get_business_news
-from stock_tool import get_stock_prices
-from gmail_tool import get_top_emails
-from weather_tool import get_weather
+from src.tools.news_tool import get_business_news
+from src.tools.stock_tool import get_stock_prices
+from src.tools.gmail_tool import get_top_emails
+from src.tools.weather_tool import get_weather
 
 load_dotenv()
 

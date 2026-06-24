@@ -39,7 +39,7 @@ htmlcov/
 # Logs
 *.log
 .env
-credentials.json
-token.pickle
+secrets/credentials.json
+secrets/token.pickle
 venv/
 __pycache__/

@@ -1,5 +1,5 @@
 import streamlit as st
-from agent import run_agent
+from src.agent import run_agent
 
 st.set_page_config(
     page_title="My First Agent",

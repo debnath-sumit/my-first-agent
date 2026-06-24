@@ -1,7 +1,7 @@
-from news_tool import get_business_news
-from stock_tool import get_stock_prices
-from gmail_tool import get_top_emails
-from ai_summary import generate_summary
+from src.tools.news_tool import get_business_news
+from src.tools.stock_tool import get_stock_prices
+from src.tools.gmail_tool import get_top_emails
+from src.llm.ai_summary import generate_summary
 from datetime import datetime
 
 

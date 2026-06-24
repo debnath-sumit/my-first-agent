@@ -1,4 +1,4 @@
-from news_tool import get_business_news
+from src.tools.news_tool import get_business_news
 
 news = get_business_news()
 
