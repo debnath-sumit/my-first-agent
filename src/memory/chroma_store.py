@@ -29,3 +29,18 @@ def search_memory(query: str, limit: int = 3):
     )
 
     return results
+
+def format_search_results(results):
+    documents = results.get("documents", [[]])[0]
+    metadatas = results.get("metadatas", [[]])[0]
+
+    if not documents:
+        return "No previous memory found."
+
+    formatted = []
+
+    for doc, metadata in zip(documents, metadatas):
+        date = metadata.get("date", "unknown date")
+        formatted.append(f"Date: {date}\nBrief:\n{doc}")
+
+    return "\n\n---\n\n".join(formatted)
