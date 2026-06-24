@@ -1,14 +1,12 @@
 from dotenv import load_dotenv
 from langchain_core.tools import tool
 from langgraph.prebuilt import create_react_agent
-from langchain_groq import ChatGroq
 
 from src.tools.news_tool import get_business_news
 from src.tools.stock_tool import get_stock_prices
 from src.tools.gmail_tool import get_top_emails
 from src.tools.weather_tool import get_weather
-from llm.llm_factory import get_llm
-
+from src.llm.llm_factory import get_llm
 
 load_dotenv()
 
