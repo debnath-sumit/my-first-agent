@@ -26,11 +26,12 @@ def run_morning_brief():
     print("SUMIT'S MORNING BRIEF")
     print("=" * 50)
     print(summary)
-    print(type(summary))
     today = datetime.today().strftime("%Y-%m-%d")
     file_name = f"morning_brief_{today}.txt"
     with open(file_name, "w") as file:
         file.write(summary)
+
+    return summary
 
 
 if __name__ == "__main__":
