@@ -43,3 +43,6 @@ secrets/credentials.json
 secrets/token.pickle
 venv/
 __pycache__/
+
+#Local Database
+data/chroma_db/
