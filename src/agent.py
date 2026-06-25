@@ -68,7 +68,24 @@ def create_agent(model_name):
     llm = get_llm(model_name)
     return create_react_agent(llm, tools)
 
+memory_keywords = [
+    "remember",
+    "memory",
+    "my name",
+    "who am i",
+    "about me",
+    "recall",
+    "previous",
+    "yesterday",
+    "last time",
+]
+
 def run_agent(user_request, model_name):
+    lower_request = user_request.lower()
+    if "what is my name" in lower_request or "my name" in lower_request:
+        memory_results = search_memory(user_request)
+        return str(memory_results)
+
     agent = create_agent(model_name)
 
     result = agent.invoke(
