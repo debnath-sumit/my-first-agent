@@ -41,10 +41,7 @@ def weather_tool(city: str) -> str:
 
 @tool
 def search_memory_tool(query: str) -> str:
-    """
-    Search previous saved morning briefings.
-    Use this when the user asks about yesterday, previous days, history, past memory, or what changed.
-    """
+    """Search previous saved memories. Input should be a simple text query."""
     results = search_memory(query)
     return str(results)
 
