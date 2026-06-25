@@ -7,8 +7,7 @@ from src.tools.stock_tool import get_stock_prices
 from src.tools.gmail_tool import get_top_emails
 from src.tools.weather_tool import get_weather
 from src.llm.llm_factory import get_llm
-from src.memory.chroma_store import search_memory, format_search_results
-
+from src.memory.pinecone_store import search_memory
 load_dotenv()
 
 
@@ -42,11 +41,11 @@ def weather_tool(city: str) -> str:
 @tool
 def search_memory_tool(query: str) -> str:
     """
-    Search previous saved morning briefings and memory.
-    Use this when the user asks about yesterday, previous days, past briefings, history, or what changed.
+    Search previous saved morning briefings.
+    Use this when the user asks about yesterday, previous days, history, past memory, or what changed.
     """
     results = search_memory(query)
-    return format_search_results(results)
+    return str(results)
 
 
 llm =get_llm()

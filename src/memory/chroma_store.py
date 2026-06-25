@@ -44,3 +44,12 @@ def format_search_results(results):
         formatted.append(f"Date: {date}\nBrief:\n{doc}")
 
     return "\n\n---\n\n".join(formatted)
+
+def get_memory_count():
+    return collection.count()
+
+
+def get_all_memory():
+    return collection.get(
+        include=["documents", "metadatas"]
+    )

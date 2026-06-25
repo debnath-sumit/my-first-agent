@@ -1,5 +1,6 @@
 import streamlit as st
 from src.agent import run_agent
+from src.memory.pinecone_store import save_memory
 
 st.set_page_config(
     page_title="My First Agent",
@@ -20,6 +21,6 @@ user_request = st.text_area(
 if st.button("Run Agent"):
     with st.spinner("Agent is thinking and using tools..."):
         response = run_agent(user_request)
-
-    st.subheader("Agent Response")
-    st.markdown(response)
+        save_memory(response)
+        st.subheader("Agent Response")
+        st.markdown(response)
