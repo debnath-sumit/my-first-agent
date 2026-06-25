@@ -44,6 +44,5 @@ if st.button("Run Agent"):
             user_request,
             model
         )
-        save_memory(response)
         st.subheader("Agent Response")
         st.markdown(response)
