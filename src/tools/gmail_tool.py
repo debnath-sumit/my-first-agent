@@ -37,43 +37,46 @@ def get_gmail_service():
     return service
 
 def get_top_emails(limit=5):
+    try:
+        service = get_gmail_service()
 
-    service = get_gmail_service()
-
-    results = service.users().messages().list(
-        userId="me",
-        maxResults=limit
-    ).execute()
-
-    messages = results.get("messages", [])
-
-    emails = []
-
-    for msg in messages:
-
-        message = service.users().messages().get(
+        results = service.users().messages().list(
             userId="me",
-            id=msg["id"]
+            maxResults=limit
         ).execute()
 
-        headers = message["payload"]["headers"]
+        messages = results.get("messages", [])
+        emails = []
 
-        subject = next(
-            (h["value"] for h in headers
-             if h["name"] == "Subject"),
-            "No Subject"
-        )
+        for msg in messages:
+            message = service.users().messages().get(
+                userId="me",
+                id=msg["id"]
+            ).execute()
 
-        sender = next(
-            (h["value"] for h in headers
-             if h["name"] == "From"),
-            "Unknown Sender"
-        )
+            headers = message["payload"]["headers"]
 
-        emails.append({
-            "sender": sender,
-            "subject": subject,
-            "snippet": message.get("snippet", "")
-        })
+            subject = next(
+                (h["value"] for h in headers if h["name"] == "Subject"),
+                "No Subject"
+            )
 
-    return emails
+            sender = next(
+                (h["value"] for h in headers if h["name"] == "From"),
+                "Unknown Sender"
+            )
+
+            emails.append({
+                "sender": sender,
+                "subject": subject,
+                "snippet": message.get("snippet", "")
+            })
+
+        return emails
+
+    except FileNotFoundError:
+        return [{
+            "sender": "System",
+            "subject": "Gmail not configured on Streamlit Cloud",
+            "snippet": "Gmail works locally because credentials.json and token.pickle exist on your Mac. For cloud deployment, Gmail OAuth needs separate setup."
+        }]
