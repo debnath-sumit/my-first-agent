@@ -7,7 +7,8 @@ from src.tools.stock_tool import get_stock_prices
 from src.tools.gmail_tool import get_top_emails
 from src.tools.weather_tool import get_weather
 from src.llm.llm_factory import get_llm
-from src.memory.pinecone_store import search_memory
+from src.memory.pinecone_store import search_memory, save_memory
+
 load_dotenv()
 
 
@@ -47,6 +48,14 @@ def search_memory_tool(query: str) -> str:
     results = search_memory(query)
     return str(results)
 
+@tool
+def save_memory_tool(memory_text: str) -> str:
+    """
+    Save an important user-provided memory to Pinecone.
+    Use this when the user says remember, save this, store this, note this, or keep this in memory.
+    """
+    return save_memory(memory_text)
+
 
 llm =get_llm()
 
@@ -55,7 +64,8 @@ tools = [
     stock_price_tool,
     gmail_tool,
     weather_tool,
-    search_memory_tool
+    search_memory_tool,
+    save_memory_tool
 ]
 
 agent = create_react_agent(
