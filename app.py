@@ -21,6 +21,18 @@ with st.sidebar:
         stats = get_memory_stats()
         st.write(stats)
 
+with st.sidebar:
+    st.header("Settings")
+
+    model = st.selectbox(
+        "Choose LLM",
+        [
+            "llama-3.1-8b-instant",
+            "llama-3.3-70b-versatile",
+            "gemini-2.5-flash"
+        ]
+    )
+
 user_request = st.text_area(
     "Ask your agent",
     f"Give me my morning brief. Include business news, stocks, and weather for {city}."
@@ -28,7 +40,10 @@ user_request = st.text_area(
 
 if st.button("Run Agent"):
     with st.spinner("Agent is thinking and using tools..."):
-        response = run_agent(user_request)
+        response = run_agent(
+            user_request,
+            model
+        )
         save_memory(response)
         st.subheader("Agent Response")
         st.markdown(response)

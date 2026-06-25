@@ -71,8 +71,15 @@ agent = create_react_agent(
 )
 
 
-def run_agent(user_request: str):
-    result = agent.invoke(
+def run_agent(user_request, model_name):
+    llm = get_llm(model_name)
+
+    dynamic_agent = create_react_agent(
+        llm,
+        tools
+    )
+
+    result = dynamic_agent.invoke(
         {
             "messages": [
                 ("user", user_request)
