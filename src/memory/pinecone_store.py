@@ -39,3 +39,7 @@ def search_memory(query: str, limit: int = 3):
     )
 
     return results
+
+def get_memory_stats():
+    stats = index.describe_index_stats()
+    return stats
