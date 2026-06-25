@@ -54,7 +54,6 @@ def save_memory_tool(memory_text: str) -> str:
     return save_memory(memory_text)
 
 
-llm =get_llm()
 
 tools = [
     business_news_tool,
@@ -65,21 +64,14 @@ tools = [
     save_memory_tool
 ]
 
-agent = create_react_agent(
-    llm,
-    tools
-)
-
+def create_agent(model_name):
+    llm = get_llm(model_name)
+    return create_react_agent(llm, tools)
 
 def run_agent(user_request, model_name):
-    llm = get_llm(model_name)
+    agent = create_agent(model_name)
 
-    dynamic_agent = create_react_agent(
-        llm,
-        tools
-    )
-
-    result = dynamic_agent.invoke(
+    result = agent.invoke(
         {
             "messages": [
                 ("user", user_request)
